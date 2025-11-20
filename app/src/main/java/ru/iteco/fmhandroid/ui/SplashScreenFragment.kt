@@ -155,6 +155,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //EspressoIdlingResources.increment();
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentSplashScreenBinding.bind(view)
@@ -224,16 +225,21 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
         binding.splashScreenCircularProgressIndicator.visibility = View.VISIBLE
 
+
         binding.splashscreenImageView.setImageResource(splashscreenImage.image)
         binding.splashscreenTextView.apply {
             text = splashscreenImage.title
             setBackgroundResource(splashscreenImage.titleBackground)
             setTextColor(ContextCompat.getColor(context, splashscreenImage.titleColor))
+
         }
+
+        //EspressoIdlingResources.decrement();
 
         lifecycleScope.launch {
             delay(3_000)
             authViewModel.authorization()
+
         }
     }
 
